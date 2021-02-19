@@ -9,6 +9,12 @@ function App() {
         <p>
           This will be the front end for this project
         </p>
+        <p>
+          Sonny Rivera-Ruiz - COSC 880
+        </p>
+        <p>
+          CRM
+        </p>
         <a
           className="App-link"
           href="https://reactjs.org"
