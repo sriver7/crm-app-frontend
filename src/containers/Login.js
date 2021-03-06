@@ -1,19 +1,36 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
+import {useHistory} from "react-router-dom";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import LoaderButton from "../components/LoaderButton";
+import {Auth} from "aws-amplify";
+import {useAppContext} from "../libs/contextLib";
+import {onError} from "../libs/errorLib";
+import {Link} from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const history = useHistory();
+    const {userHasAuthenticated} = useAppContext();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
-  function validateForm() {
-      return email.length > 0 && password.length > 0;
-  }
-
-  function handleSubmit(event) {
-      event.preventDefault();
-  }
+    function validateForm() {
+        return email.length > 0 && password.length > 0;
+    }
+    
+    async function handleSubmit(event) {
+        event.preventDefault();
+        setIsLoading(true);
+        try {
+            await Auth.signIn(email, password);
+            userHasAuthenticated(true);
+            history.push("/");
+        } catch (e) {
+            onError(e);
+            setIsLoading(false);
+        }
+    }
 
   return (
     <div className="Login">
@@ -35,9 +52,16 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button block size="lg" type="submit" disabled={!validateForm()}>
+            <Link to="/login/reset">Forgot password?</Link>
+            <LoaderButton
+                block
+                size="lg"
+                type="submit"
+                isLoading={isLoading}
+                disabled={!validateForm()}
+            >
                 Login
-            </Button>
+            </LoaderButton>
         </Form>
     </div>
     );
