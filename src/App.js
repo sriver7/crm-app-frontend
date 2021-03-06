@@ -1,29 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Navbar from "react-bootstrap/Navbar";
+import "./App.css";
+import Routes from "./Routes";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          This will be the front end for this project
-        </p>
-        <p>
-          Sonny Rivera-Ruiz - COSC 880
-        </p>
-        <p>
-          CRM
-        </p>
-        <a
-          className="App-link"
-          href="https://github.com/sriver7/crm-app-frontend"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-      </header>
+    <div className="App container py-3">
+      <Navbar collapseOnSelect bg="light" expand="md" className="mb-3">
+        <Navbar.Brand className="font-weight-bold text-muted">
+          RML CRM Application
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar>
+      <Routes />
     </div>
   );
 }
