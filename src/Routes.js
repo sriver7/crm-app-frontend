@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import ErrorPage from "./containers/ErrorPage";
 import Login from "./containers/Login";
-import ResetPassword from "./containers/ResetPassword";
+//import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
   return (
