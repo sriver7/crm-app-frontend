@@ -1,3 +1,8 @@
+# This is the front end for my COSC 880 Project
+No functionality currently except for the React boiler plate. 
+Currently hosted on [AWS Amplify](https://master.d1692bwc0fhyz7.amplifyapp.com)
+The backend for this application is also currently under development. This will be a Serverless Stack application.
+Node.js Backend Code is on [GitHub here](https://github.com/sriver7/crm-app-backend)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
