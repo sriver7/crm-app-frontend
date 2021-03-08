@@ -18,7 +18,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "notes",
+        name: "rml-crm-app",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
       },

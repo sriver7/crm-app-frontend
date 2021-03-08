@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Home from "./containers/Home";
 import ErrorPage from "./containers/ErrorPage";
 import Login from "./containers/Login";
+import NewCustomer from "./containers/NewCustomer";
 //import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
@@ -14,10 +15,12 @@ export default function Routes() {
       <Route exact path="/login">
         <Login />
       </Route>
+      <Route exact path="/customer/new">
+        <NewCustomer />
+      </Route>
       <Route>
         <ErrorPage />
       </Route>
-
     </Switch>
   );
 }
