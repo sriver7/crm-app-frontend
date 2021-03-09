@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, {useState } from "react";
 import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import {onError} from "../libs/errorLib";
-import config from "../config";
+//import config from "../config";
 import "./NewCustomer.css";
 import {Col} from "react-bootstrap";
 import {API} from "aws-amplify";
