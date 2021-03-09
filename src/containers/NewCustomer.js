@@ -35,6 +35,29 @@ export default function NewCustomer() {
     async function handleSubmit(event) {
         event.preventDefault();
         setIsLoading(true);
+        try {
+            await createCustomer({customer_name, customer_phone_1, customer_phone_2, customer_address_1, customer_city, customer_state, customer_zip, customer_email, customer_note, customer_is_active});
+            history.push("/");
+        } catch (e) {
+            onError(e);
+            setIsLoading(false);
+        }
+    }
+
+    function createCustomer(customer_name, customer_phone_1, customer_phone_2, customer_address_1, customer_city, customer_state, customer_zip, customer_email, customer_note, customer_is_active) {
+        return API.post("rml-crm-app", "/customers", {
+            body: 
+                customer_name,
+                customer_phone_1,
+                customer_phone_2,
+                customer_address_1,
+                customer_city,
+                customer_state,
+                customer_zip,
+                customer_email,
+                customer_note,
+                customer_is_active
+        })
     }
     
     return (
