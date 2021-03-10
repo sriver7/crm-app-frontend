@@ -3,7 +3,6 @@ import Form from "react-bootstrap/Form";
 import { useHistory } from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import {onError} from "../libs/errorLib";
-//import config from "../config";
 import "./NewCustomer.css";
 import {Col} from "react-bootstrap";
 import {API} from "aws-amplify";
@@ -44,13 +43,14 @@ export default function NewCustomer() {
         }
     }
 
-    function createCustomer(customer_name, customer_phone_1, customer_phone_2, customer_address_1, customer_city, customer_state, customer_zip, customer_email, customer_note, customer_is_active) {
+    function createCustomer(customer_name, customer_phone_1, customer_phone_2, customer_address_1, customer_address_2, customer_city, customer_state, customer_zip, customer_email, customer_note, customer_is_active) {
         return API.post("rml-crm-app", "/customers", {
             body: 
                 customer_name,
                 customer_phone_1,
                 customer_phone_2,
                 customer_address_1,
+                customer_address_2,
                 customer_city,
                 customer_state,
                 customer_zip,
