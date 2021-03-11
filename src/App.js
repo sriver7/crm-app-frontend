@@ -60,7 +60,7 @@ function App() {
                 )}
                   {isAuthenticated ? 
                   (
-                    <><LinkContainer to="/customer/new"><Nav.Link>Customers</Nav.Link></LinkContainer></>
+                    <><LinkContainer to="/customer/new"><Nav.Link>Add Customer</Nav.Link></LinkContainer></>
                   ) 
                 : (
                   <></>
