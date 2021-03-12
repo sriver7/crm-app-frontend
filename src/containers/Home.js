@@ -2,55 +2,42 @@ import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Table from "react-bootstrap/Table"
 import { useAppContext } from "../libs/contextLib";
-import { onError } from "../libs/errorLib";
+import {onError} from "../libs/errorLib";
 import "./Home.css";
-import { API } from "aws-amplify";
-import { BsFillPersonPlusFill } from "react-icons/bs";
-import { LinkContainer } from "react-router-bootstrap";
+import {API} from "aws-amplify";
+import {BsFillPersonPlusFill} from "react-icons/bs";
+import {LinkContainer} from "react-router-bootstrap";
 
 export default function Home() {
   const [customers, setCustomers] = useState([]);
   const [customerCount, setCustomerCount] = useState([]);
-  const { isAuthenticated } = useAppContext();
+  const {isAuthenticated} = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-  async function onLoad() {
-    if (!isAuthenticated) {
-      return;
+    async function onLoad() {
+      if (!isAuthenticated) {
+        return;
+      }
+
+      try {
+        const customers = await loadCustomers();
+        const customers_json = customers.Items;
+        const customerCount = customers.Count;
+        setCustomerCount(customerCount);
+        setCustomers(customers_json);
+      } catch (e) {
+        onError(e);
+      }
+      setIsLoading(false);
     }
-
-    try {
-      const customers = await loadCustomers();
-      const customers_json = customers.Items;
-      const customerCount = customers.Count;
-      console.log("New JSON");
-      console.log(customers_json);
-      //Modify the JSON to set it only for what I want. 
-      setCustomerCount(customerCount);
-      setCustomers(customers_json);
-    } catch (e) {
-      onError(e);
-    }
-
-    setIsLoading(false);
-  }
-
-  onLoad();
-}, [isAuthenticated]);
+    onLoad();
+  }, [isAuthenticated]);
 
 function loadCustomers() {
   console.log(API.get("rml-crm-app", "/customers"));
   return API.get("rml-crm-app", "/customers");
 }
-
-const Customers = props => (
-  <tr>
-    <td>{props.customer_name}</td>
-    <td>{props.customer_address_1}</td>
-    <td>{props.customer_phone_1}</td>
-  </tr>
-);
 
 function renderCustomersList(customers) {
   return (
@@ -63,20 +50,28 @@ function renderCustomersList(customers) {
         </ListGroup.Item>
       </LinkContainer>
       {customers.map(({ customerId, customer_name, customer_address_1, customer_phone_1}) => (
-        <LinkContainer key={customerId} to={`/customers/${customerId}`}>
-          <ListGroup.Item action>
-            <span className="font-weight-bold float-left">
+      <LinkContainer key={customerId} to={`/customers/${customerId}`}>
+        <ListGroup.Item action>
+          <span className="font-weight-bold float-left">
               {customer_name}
-            </span>
-            <span className="text-muted float-right">
+          </span>
+          <span className="text-muted float-right">
               Address: {customer_address_1}
-            </span>
-            <span className="font-weight-bold">
-              {customer_phone_1}
-            </span>
-          </ListGroup.Item>
-        </LinkContainer>
+          </span>
+          <br></br>
+          <span className="text-muted float-left">
+              Phone: {customer_phone_1}
+          </span>
+        </ListGroup.Item>
+      </LinkContainer>
       ))}
+
+
+
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
@@ -86,11 +81,15 @@ function renderCustomersList(customers) {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
+          {customers.map(({customerId, customer_name, customer_phone_1, customer_address_1}) => (
+          <LinkContainer key={customerId} to={`/customers/${customerId}`}>
+            <tr action role="button">
+              <td>{customer_name}</td>
+              <td>{customer_phone_1}</td>
+              <td>{customer_address_1}</td>
+            </tr>
+          </LinkContainer>
+          ))}
         </tbody>
       </Table>
     </>
