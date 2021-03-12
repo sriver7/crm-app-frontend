@@ -50,7 +50,7 @@ function renderCustomersList(customers) {
         </ListGroup.Item>
       </LinkContainer>
       {customers.map(({ customerId, customer_name, customer_address_1, customer_phone_1}) => (
-      <LinkContainer key={customerId} to={`/customers/${customerId}`}>
+      <LinkContainer key={customerId} to={`/customer/${customerId}`}>
         <ListGroup.Item action>
           <span className="font-weight-bold float-left">
               {customer_name}
@@ -82,7 +82,7 @@ function renderCustomersList(customers) {
         </thead>
         <tbody>
           {customers.map(({customerId, customer_name, customer_phone_1, customer_address_1}) => (
-          <LinkContainer key={customerId} to={`/customers/${customerId}`}>
+          <LinkContainer key={customerId} to={`/customer/${customerId}`}>
             <tr action role="button">
               <td>{customer_name}</td>
               <td>{customer_phone_1}</td>

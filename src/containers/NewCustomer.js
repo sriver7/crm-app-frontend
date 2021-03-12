@@ -20,7 +20,6 @@ export default function NewCustomer() {
     const [customer_email, setCustomer_email] = useState("");
     const [customer_note, setCustomer_note] = useState("");
     const [customer_is_active, setCustomer_active] = useState("");
-
     const [isLoading, setIsLoading] = useState(false);
     
     function validateForm() {
@@ -66,42 +65,77 @@ export default function NewCustomer() {
             <Form.Row>
                 <Form.Group as={Col} xs={7} controlId="Name">
                     <Form.Label>Customer Name</Form.Label>
-                    <Form.Control value={customer_name} onChange={(e) => setCustomer_name(e.target.value)}/>
+                    <Form.Control 
+                        value={customer_name} 
+                        onChange={(e) => setCustomer_name(e.target.value)}
+                    />
                     <Form.Text>Required</Form.Text>
                 </Form.Group>
                 <Form.Group as={Col} controlId="Email">
                     <Form.Label>Customer E-mail</Form.Label>
-                    <Form.Control type="email" value={customer_email} placeholder="email@email.com" onChange={(e) => setCustomer_email(e.target.value)}/>
+                    <Form.Control 
+                        type="email" 
+                        value={customer_email} 
+                        placeholder="email@email.com" 
+                        onChange={(e) => setCustomer_email(e.target.value)}
+                    />
                 </Form.Group>
             </Form.Row>
             <Form.Row>
                 <Col>
                     <Form.Label>Preferred Phone Number:</Form.Label>
-                    <Form.Control required type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={customer_phone_1} placeholder="000-000-0000"onChange={(e) => setCustomer_phone_1(e.target.value)}/>
+                    <Form.Control 
+                        required type="tel" 
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                        value={customer_phone_1} placeholder="000-000-0000"
+                        onChange={(e) => setCustomer_phone_1(e.target.value)}
+                    />
                     <Form.Text>Required</Form.Text>
                 </Col>
                 <Col>
                     <Form.Label>Alternative Phone Number:</Form.Label>
-                    <Form.Control type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" value={customer_phone_2} placeholder="000-000-0000" onChange={(e) => setCustomer_phone_2(e.target.value)}/>
+                    <Form.Control 
+                        type="tel" 
+                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" 
+                        value={customer_phone_2} 
+                        placeholder="000-000-0000" 
+                        onChange={(e) => setCustomer_phone_2(e.target.value)}
+                    />
                 </Col> 
             </Form.Row>
             <Form.Row> </Form.Row>
             <Form.Group controlId="content">
                 <Form.Label>Mailing Address Line 1:</Form.Label>
-                <Form.Control value={customer_address_1} placeholder="123 Main Street" onChange={(e) => setCustomer_address_1(e.target.value)}/>
+                <Form.Control 
+                    value={customer_address_1} 
+                    placeholder="123 Main Street" 
+                    onChange={(e) => setCustomer_address_1(e.target.value)}
+                />
             </Form.Group>
             <Form.Group controlId="content">
                 <Form.Label>Mailing Address Line 2:</Form.Label>
-                <Form.Control value={customer_address_2} placeholder="Suite 123" onChange={(e) => setCustomer_address_2(e.target.value)}/>
+                <Form.Control 
+                    value={customer_address_2} 
+                    placeholder="Suite 123" 
+                    onChange={(e) => setCustomer_address_2(e.target.value)}
+                />
             </Form.Group>
             <Form.Row>
                 <Form.Group as={Col} xs={7} controlId="City">
                     <Form.Label>City</Form.Label>
-                    <Form.Control value={customer_city} onChange={(e) => setCustomer_city(e.target.value)}/>
+                    <Form.Control 
+                        value={customer_city} 
+                        onChange={(e) => setCustomer_city(e.target.value)}
+                    />
                 </Form.Group>
                 <Form.Group as={Col} controlId="State">
                     <Form.Label>State</Form.Label>
-                    <Form.Control as="select" defaultValue="MD" value={customer_state} onChange={(e) => setCustomer_state(e.target.value)}>
+                    <Form.Control 
+                        as="select" 
+                        defaultValue="MD" 
+                        value={customer_state} 
+                        onChange={(e) => setCustomer_state(e.target.value)}
+                    >
                         <option>MD</option>
                         <option>AL</option>
                         <option>AK</option>
@@ -157,17 +191,30 @@ export default function NewCustomer() {
                 </Form.Group>
                 <Form.Group as={Col} controlId="ZipCode">
                     <Form.Label>Zip</Form.Label>
-                    <Form.Control value={customer_zip} pattern="[0-9]{5}" onChange={(e) => setCustomer_zip(e.target.value)}/>
+                    <Form.Control 
+                        value={customer_zip} 
+                        pattern="[0-9]{5}" 
+                        onChange={(e) => setCustomer_zip(e.target.value)}
+                    />
                 </Form.Group>
             </Form.Row>
 
             <Form.Group controlId="content">
                 <Form.Label>Customer Is Active:</Form.Label>
-                <Form.Check type="switch" id="customer_is_active" value={customer_is_active} onChange={(e) => setCustomer_active(e.target.value)}/>
+                <Form.Check 
+                    type="switch" 
+                    id="customer_is_active" 
+                    value={customer_is_active} 
+                    onChange={(e) => setCustomer_active(e.target.value)}
+                />
             </Form.Group>
             <Form.Group controlId="content">
                 <Form.Label>Note:</Form.Label>
-                <Form.Control value={customer_note} as="textarea" onChange={(e) => setCustomer_note(e.target.value)}/>
+                <Form.Control 
+                    value={customer_note} 
+                    as="textarea" 
+                    onChange={(e) => setCustomer_note(e.target.value)}
+                />
             </Form.Group>
             <LoaderButton
                 block
