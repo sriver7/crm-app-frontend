@@ -7,6 +7,7 @@ import NewCustomer from "./containers/NewCustomer";
 import Customer from "./containers/Customer";
 import NewLocation from "./containers/NewLocation";
 import NewInvoice from "./containers/NewInvoice";
+import NewPayment from "./containers/NewPayment";
 //import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
@@ -29,6 +30,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/invoice/new/:id">
         <NewInvoice />
+      </Route>
+      <Route exact path="/payment/new/:id">
+        <NewPayment />
       </Route>
       <Route>
         <ErrorPage />
