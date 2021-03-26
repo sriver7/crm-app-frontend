@@ -5,6 +5,7 @@ import ErrorPage from "./containers/ErrorPage";
 import Login from "./containers/Login";
 import NewCustomer from "./containers/NewCustomer";
 import Customer from "./containers/Customer";
+import NewLocation from "./containers/NewLocation";
 //import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
@@ -22,6 +23,9 @@ export default function Routes() {
             <Route exact path="/customer/:id">
         <Customer />
       </Route>
+      <Route exact path="/locations/new/:id">
+        <NewLocation />
+      </Route>
       <Route>
         <ErrorPage />
       </Route>
@@ -34,3 +38,5 @@ export default function Routes() {
         <ResetPassword />
       </UnauthenticatedRoute>
 */
+
+//https://stackoverflow.com/questions/52064303/reactjs-pass-props-with-redirect-component

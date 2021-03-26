@@ -11,6 +11,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 export default function Customer(){
     const{id} = useParams();
+
     const history = useHistory();
     const [customer, setCustomer] = useState(null);
     const [customer_name, setCustomer_name] = useState("");
@@ -303,7 +304,10 @@ export default function Customer(){
             )
 
             }
-            <LinkContainer to="/locations/new">
+            <LinkContainer 
+                to={{
+                    pathname: `/locations/new/${id}`
+                }}>
                 <ListGroup.Item action className="py-3 text-nowrap text-truncate">
                 <span className="ml-2 font-weight-bold">Create a new Location</span>
                 </ListGroup.Item>
