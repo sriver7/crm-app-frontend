@@ -312,14 +312,17 @@ export default function Customer(){
                 <span className="ml-2 font-weight-bold">Create a new Location</span>
                 </ListGroup.Item>
             </LinkContainer>
-            <LinkContainer to="/customer/new">
+            <LinkContainer 
+                to={{
+                    pathname: `/invoice/new/${id}`
+                }}>
                 <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-                <span className="ml-2 font-weight-bold">Invoices</span>
+                <span className="ml-2 font-weight-bold">Add a New Invoice</span>
                 </ListGroup.Item>
             </LinkContainer>
             <LinkContainer to="/customer/new">
                 <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-                <span className="ml-2 font-weight-bold">Quotes</span>
+                <span className="ml-2 font-weight-bold">Generate a Quote</span>
                 </ListGroup.Item>
             </LinkContainer>
         </div>

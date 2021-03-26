@@ -14,7 +14,7 @@ export default function NewLocation() {
     const [loc_address_1, setLoc_address_1] = useState("");
     const [loc_address_2, setLoc_address_2] = useState("");
     const [loc_city, setLoc_city] = useState("");
-    const [loc_state, setLoc_state] = useState("");
+    const [loc_state] = useState("MD");
     const [loc_zip, setLoc_zip] = useState("");
     const [loc_grass, setGrass] = useState("");
     const [loc_mulch, setMulch] = useState("");
@@ -94,12 +94,9 @@ export default function NewLocation() {
                 <Form.Group as={Col} controlId="State">
                     <Form.Label>State</Form.Label>
                     <Form.Control 
-                        as="select" 
-                        defaultValue="MD" 
-                        value={loc_state} 
-                        onChange={(e) => setLoc_state(e.target.value)}
+                        value="MD"
+                        plaintext readOnly
                     >
-                        <option>MD</option>
                     </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} controlId="ZipCode">
