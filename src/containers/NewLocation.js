@@ -9,8 +9,9 @@ import {API} from "aws-amplify";
 
 export default function NewLocation() {
     const history = useHistory();
-     const{id} = useParams();
+    const{id} = useParams();
 
+    const [customerId, setCustomerId] = useState("");
     const [loc_address_1, setLoc_address_1] = useState("");
     const [loc_address_2, setLoc_address_2] = useState("");
     const [loc_city, setLoc_city] = useState("");
@@ -38,10 +39,10 @@ export default function NewLocation() {
         }
     }
 
-    function createLocation(customerId, loc_address_1, loc_address_2, loc_city, loc_state, loc_zip, loc_grass, loc_mulch, loc_fallCleanup, loc_fertilizer) {
+    function createLocation(id, loc_address_1, loc_address_2, loc_city, loc_state, loc_zip, loc_grass, loc_mulch, loc_fallCleanup, loc_fertilizer) {
         return API.post("rml-crm-app", "/locations", {
             body: 
-                customerId,
+                id,
                 loc_address_1,
                 loc_address_2,
                 loc_city,
@@ -60,9 +61,10 @@ export default function NewLocation() {
             <Form.Row>
                 <Form.Group as={Col} xs={7} controlId="Name">
                     <Form.Label>Customer ID</Form.Label>
-                    <Form.Control 
+                    <Form.Control
                         value={id}
-                        plaintext readOnly
+                        readOnly
+                        onChange={(e) => setCustomerId(id)}
                     />
                 </Form.Group>
             </Form.Row>

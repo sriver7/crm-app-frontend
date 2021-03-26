@@ -49,35 +49,13 @@ function renderCustomersList(customers) {
           <span className="ml-2 font-weight-bold float-right">Customers: {customerCount}</span>
         </ListGroup.Item>
       </LinkContainer>
-      {customers.map(({ customerId, customer_name, customer_address_1, customer_phone_1}) => (
-      <LinkContainer key={customerId} to={`/customer/${customerId}`}>
-        <ListGroup.Item action>
-          <span className="font-weight-bold float-left">
-              {customer_name}
-          </span>
-          <span className="text-muted float-right">
-              Address: {customer_address_1}
-          </span>
-          <br></br>
-          <span className="text-muted float-left">
-              Phone: {customer_phone_1}
-          </span>
-        </ListGroup.Item>
-      </LinkContainer>
-      ))}
-
-
-
-      <br></br>
-      <br></br>
-      <br></br>
       <br></br>
       <Table striped bordered hover size="sm">
         <thead>
           <tr>
             <th>Name</th>
             <th>Phone</th>
-            <th>Address</th>
+            <th>Mailing Address</th>
           </tr>
         </thead>
         <tbody>

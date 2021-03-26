@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {useParams, useHistory} from "react-router-dom";
+import {useParams, useHistory, Link} from "react-router-dom";
 import {API} from "aws-amplify";
 import {onError} from "../libs/errorLib";
 import {Form} from "react-bootstrap";
@@ -27,6 +27,8 @@ export default function Customer(){
     const [customer_is_active, setCustomer_active] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
+
+    const [locations, setLocations] = useState([]);
 
     useEffect(() => {
         function loadCustomer() {
@@ -62,6 +64,10 @@ export default function Customer(){
                 setCustomer_note(customer_note);
                 setCustomer_active(customer_is_active);
                 setCustomer(customer);
+
+                const locations = await loadLocations();
+                const locations_json = locations.Items;
+                setLocations(locations_json);
             } catch (e){
                 onError(e);
             }
@@ -69,6 +75,12 @@ export default function Customer(){
 
         onLoad();
     }, [id]);
+
+    function loadLocations(){
+        return API.get("rml-crm-app", `/locations/customer/${id}`);
+    }
+
+
 
     function validateForm(){
         return customer_name.length > 0 && customer_phone_1.length > 0;
@@ -131,6 +143,39 @@ export default function Customer(){
             setIsDeleting(false);
         }
     }
+
+    function renderLocationsList(locations) {
+  return (
+    <>
+      {locations.map(({ locationId, loc_address_1, loc_city, loc_grass, loc_mulch, loc_fallCleanup, loc_fertilizer}) => (
+      <LinkContainer key={locationId} to={`/locations/${locationId}`}>
+        <ListGroup.Item action>
+          <span className="font-weight-bold float-left">
+              Address: {loc_address_1}
+          </span>
+          <span className="font-weight-bold float-right">
+              {loc_city}
+          </span>
+          <br></br>
+          <span className="text-muted float-left">
+              Grass Cut: ${loc_grass}
+          </span>
+            <span className="text-muted float-right">
+              Mulch: ${loc_mulch}
+          </span>
+          <br></br>
+          <span className="text-muted float-left">
+              Fall Cleanup: ${loc_fallCleanup}
+          </span>
+            <span className="text-muted float-right">
+              Fertilizer: ${loc_fertilizer}
+          </span>
+        </ListGroup.Item>
+      </LinkContainer>
+      ))}
+    </>
+  );
+}
 
     return (
         <div className="Customer">
@@ -312,6 +357,16 @@ export default function Customer(){
                 <span className="ml-2 font-weight-bold">Create a new Location</span>
                 </ListGroup.Item>
             </LinkContainer>
+            <ListGroup>{!isLoading && renderLocationsList(locations)}</ListGroup>
+            <LinkContainer 
+                to={{
+                    pathname: `/invoice/new/${id}`
+                }}>
+                <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+                <span className="ml-2 font-weight-bold">View Balance History</span>
+                </ListGroup.Item>
+            </LinkContainer>
+            
             <LinkContainer 
                 to={{
                     pathname: `/invoice/new/${id}`

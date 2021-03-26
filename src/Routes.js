@@ -5,6 +5,7 @@ import ErrorPage from "./containers/ErrorPage";
 import Login from "./containers/Login";
 import NewCustomer from "./containers/NewCustomer";
 import Customer from "./containers/Customer";
+import Location from "./containers/Location";
 import NewLocation from "./containers/NewLocation";
 import NewInvoice from "./containers/NewInvoice";
 import NewPayment from "./containers/NewPayment";
@@ -22,8 +23,11 @@ export default function Routes() {
       <Route exact path="/customer/new">
         <NewCustomer />
       </Route>
-            <Route exact path="/customer/:id">
+      <Route exact path="/customer/:id">
         <Customer />
+      </Route>
+      <Route exact path="/locations/:id">
+        <Location />
       </Route>
       <Route exact path="/locations/new/:id">
         <NewLocation />
