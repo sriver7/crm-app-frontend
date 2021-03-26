@@ -1,6 +1,6 @@
 import React, {useState } from "react";
 import Form from "react-bootstrap/Form";
-import {useParams, useHistory, Link} from "react-router-dom";
+import {useParams, useHistory} from "react-router-dom";
 import LoaderButton from "../components/LoaderButton";
 import {onError} from "../libs/errorLib";
 import "./NewCustomer.css";
@@ -25,10 +25,6 @@ export default function NewLocation() {
     function validateForm() {
         return loc_address_1.length > 0;
     }
-
-  /*function handleFormChange(event) {
-      blah = blah.target.blah
-  }*/
 
     async function handleSubmit(event) {
         event.preventDefault();
