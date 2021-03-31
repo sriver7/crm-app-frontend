@@ -5,8 +5,10 @@ import { useAppContext } from "../libs/contextLib";
 import {onError} from "../libs/errorLib";
 import "./Home.css";
 import {API} from "aws-amplify";
-import {BsFillPersonPlusFill} from "react-icons/bs";
+import {BsFillPersonPlusFill, BsFillEnvelopeFill} from "react-icons/bs";
 import {LinkContainer} from "react-router-bootstrap";
+import {Link} from "react-router-dom";
+import { ListGroupItem } from "react-bootstrap";
 
 export default function Home() {
   const [customers, setCustomers] = useState([]);
@@ -47,6 +49,15 @@ function renderCustomersList(customers) {
           <BsFillPersonPlusFill size={17} />
           <span className="ml-2 font-weight-bold">Create a new customer</span>
           <span className="ml-2 font-weight-bold float-right">Customers: {customerCount}</span>
+        </ListGroup.Item>
+      </LinkContainer>
+
+
+
+      <LinkContainer to="/authenticateDocuSign">
+        <ListGroup.Item action className="py-3 text-nowrap text-truncate">
+          <BsFillEnvelopeFill size={17} />
+          <span className="ml-2 font-weight-bold">Generate a Quote</span>
         </ListGroup.Item>
       </LinkContainer>
       <br></br>

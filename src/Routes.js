@@ -9,6 +9,7 @@ import Location from "./containers/Location";
 import NewLocation from "./containers/NewLocation";
 import NewInvoice from "./containers/NewInvoice";
 import NewPayment from "./containers/NewPayment";
+import NewQuote from "./containers/NewQuote";
 //import ResetPassword from "./containers/ResetPassword";
 
 export default function Routes() {
@@ -38,6 +39,12 @@ export default function Routes() {
       <Route exact path="/payment/new/:id">
         <NewPayment />
       </Route>
+      <Route exact path="/newQuote">
+        <NewQuote />
+      </Route>
+      <Route exact path='/authenticateDocuSign' component={() => {
+        window.location.href = ' https://account-d.docusign.com/oauth/auth?o	response_type=codeo&scope=signatureo&client_id=45f7a7ea-f1ce-49a2-a061-f8bed9ddf945&redirect_uri=http://localhost:3000/newQuote';
+      }}/>
       <Route>
         <ErrorPage />
       </Route>
