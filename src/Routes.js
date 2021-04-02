@@ -43,7 +43,7 @@ export default function Routes() {
         <NewQuote />
       </Route>
       <Route exact path='/authenticateDocuSign' component={() => {
-        window.location.href = ' https://account-d.docusign.com/oauth/auth?o	response_type=codeo&scope=signatureo&client_id=45f7a7ea-f1ce-49a2-a061-f8bed9ddf945&redirect_uri=http://localhost:3000/newQuote';
+        window.location.href = ' https://account-d.docusign.com/oauth/auth?o	response_type=codeo&scope=signatureo&client_id=45f7a7ea-f1ce-49a2-a061-f8bed9ddf945&redirect_uri=https://www.riveraml.com/newQuote';
       }}/>
       <Route>
         <ErrorPage />
