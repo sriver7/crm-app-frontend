@@ -383,11 +383,7 @@ export default function Customer(){
                 <span className="ml-2 font-weight-bold">Add a New Payment</span>
                 </ListGroup.Item>
             </LinkContainer>
-            <LinkContainer to="/customer/new">
-                <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-                <span className="ml-2 font-weight-bold">Generate a Quote</span>
-                </ListGroup.Item>
-            </LinkContainer>
+
         </div>
     );
 }
