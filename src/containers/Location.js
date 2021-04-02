@@ -7,6 +7,7 @@ import "./NewCustomer.css";
 import LoaderButton from "../components/LoaderButton";
 import {Col} from "react-bootstrap";
 
+
 export default function Location(){
     const{id} = useParams();
 
@@ -58,14 +59,33 @@ export default function Location(){
                 setLoc_fertilizer(loc_fertilizer);
                 setLocation(location);
 
+
             } catch (e){
                 onError(e);
             }
+
+            
         }
+
 
         onLoad();
     }, [id]);
 
+    function getLoc_address_1(){
+        return loc_address_1;
+    }
+
+    function getCity(){
+        return loc_city+", MD"
+    }
+
+    function googleForm(){
+        let location = getLoc_address_1()+", "+getCity();
+        let stringGoogle = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyBIWiADFX3gmWe56M2O9zb4Epjd7kGu2FU&q='+location+"&zoom=19&maptype=satellite";
+        console.log(stringGoogle);
+
+        return stringGoogle;
+    }
 
 
     function validateForm(){
@@ -77,6 +97,7 @@ export default function Location(){
             body: location
         });
     }
+
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -141,6 +162,7 @@ export default function Location(){
                                 value={customerId}
                                 readOnly
                                 onChange={(e) => setCustomerId(e.target.value)}
+                                
                             />
                         </Form.Group>
                     </Form.Row>
@@ -149,7 +171,9 @@ export default function Location(){
                         <Form.Control 
                             value={loc_address_1} 
                             placeholder="123 Main Street" 
-                            onChange={(e) => setLoc_address_1(e.target.value)}
+                            onChange={(e) => 
+                                    setLoc_address_1(e.target.value)
+                            }
                         />
                     </Form.Group>
                     <Form.Group controlId="Address2">
@@ -233,6 +257,19 @@ export default function Location(){
                     >
                         Delete
                     </LoaderButton>
+                    Google Maps Location View
+                    <br></br>
+                    <iframe
+                    title="MAP"
+                    width="600"
+                    height="450"
+                    frameBorder = "0"
+                    loading="lazy"
+                    allowFullScreen
+                    src={googleForm()}
+                    >
+                    </iframe>
+
             </Form>
             )
 
@@ -240,3 +277,5 @@ export default function Location(){
         </div>
     );
 }
+
+//https://developers.google.com/maps/documentation/embed/embedding-map?hl=en
