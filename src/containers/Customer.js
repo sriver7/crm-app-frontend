@@ -358,14 +358,6 @@ export default function Customer(){
                 </ListGroup.Item>
             </LinkContainer>
             <ListGroup>{!isLoading && renderLocationsList(locations)}</ListGroup>
-            <LinkContainer 
-                to={{
-                    pathname: `/invoice/new/${id}`
-                }}>
-                <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-                <span className="ml-2 font-weight-bold">View Balance History</span>
-                </ListGroup.Item>
-            </LinkContainer>
             
             <LinkContainer 
                 to={{
