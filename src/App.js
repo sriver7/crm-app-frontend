@@ -51,19 +51,28 @@ function App() {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Nav activeKey={window.location.pathname}>
-                {isAuthenticated ? 
-                  (
+                {isAuthenticated ? (
                     <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
-                  ) 
-                : (
-                  <><LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer></>
+                  ) : (
+                    <><LinkContainer to="/login"><Nav.Link>Login</Nav.Link></LinkContainer></>
                 )}
                   {isAuthenticated ? 
                   (
                     <><LinkContainer to="/customer/new"><Nav.Link>Add Customer</Nav.Link></LinkContainer></>
                   ) 
                 : (
-                  <></>
+                  <>
+
+                  </>
+                )}
+                  {isAuthenticated ? 
+                  (
+                    <><LinkContainer to="/settings"><Nav.Link>Settings</Nav.Link></LinkContainer></>
+                  ) 
+                : (
+                  <>
+                  
+                  </>
                 )}
               </Nav>
             </Navbar.Collapse>
@@ -77,3 +86,5 @@ function App() {
 }
 
 export default App;
+
+

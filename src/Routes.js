@@ -10,7 +10,11 @@ import NewLocation from "./containers/NewLocation";
 import NewInvoice from "./containers/NewInvoice";
 import NewPayment from "./containers/NewPayment";
 import NewQuote from "./containers/NewQuote";
-//import ResetPassword from "./containers/ResetPassword";
+import ResetPassword from "./containers/ResetPassword";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+import ChangePassword from "./containers/ChangePassword";
+import ChangeEmail from "./containers/ChangeEmail";
+import Settings from "./containers/Settings";
 
 export default function Routes() {
   return (
@@ -18,8 +22,20 @@ export default function Routes() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/login">
+      <UnauthenticatedRoute exact path="/login">
         <Login />
+      </UnauthenticatedRoute>
+      <UnauthenticatedRoute exact path="/login/reset">
+        <ResetPassword />
+      </UnauthenticatedRoute>
+      <Route exact path="/settings">
+        <Settings />
+      </Route>
+      <Route exact path="/settings/email">
+        <ChangeEmail />
+      </Route>
+      <Route exact path="/settings/password">
+        <ChangePassword />
       </Route>
       <Route exact path="/customer/new">
         <NewCustomer />

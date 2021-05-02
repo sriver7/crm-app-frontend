@@ -8,6 +8,14 @@ import LoaderButton from "../components/LoaderButton";
 import {Col} from "react-bootstrap";
 import {LinkContainer} from "react-router-bootstrap";
 import ListGroup from "react-bootstrap/ListGroup";
+import Tabs from "react-bootstrap/Tabs"
+import Tab from "react-bootstrap/Tab"
+import Table from "react-bootstrap/Table"
+import Accordion from "react-bootstrap/Accordion"
+import {BsCardList} from "react-icons/bs"
+import {MdAttachMoney} from "react-icons/md"
+import {FaFileInvoiceDollar} from "react-icons/fa"
+import Card from "react-bootstrap/Card"
 
 export default function Customer(){
     const{id} = useParams();
@@ -29,6 +37,8 @@ export default function Customer(){
     const [isDeleting, setIsDeleting] = useState(false);
 
     const [locations, setLocations] = useState([]);
+    const [invoices, setInvoices] = useState([]);
+    const [payments, setPayments] = useState([]);
 
     useEffect(() => {
         function loadCustomer() {
@@ -67,7 +77,13 @@ export default function Customer(){
 
                 const locations = await loadLocations();
                 const locations_json = locations.Items;
+                const invoices = await loadInvoices();
+                const invoices_json = invoices.Items;
+                const payments = await loadPayments();
+                const payments_json = payments.Items;
                 setLocations(locations_json);
+                setInvoices(invoices_json);
+                setPayments(payments_json);
             } catch (e){
                 onError(e);
             }
@@ -80,7 +96,13 @@ export default function Customer(){
         return API.get("rml-crm-app", `/locations/customer/${id}`);
     }
 
+    function loadInvoices(){
+        return API.get("rml-crm-app", `/invoices/customer/${id}`);
+    }
 
+    function loadPayments(){
+        return API.get("rml-crm-app", `/payments/customer/${id}`);
+    }
 
     function validateForm(){
         return customer_name.length > 0 && customer_phone_1.length > 0;
@@ -145,37 +167,87 @@ export default function Customer(){
     }
 
     function renderLocationsList(locations) {
-  return (
-    <>
-      {locations.map(({ locationId, loc_address_1, loc_city, loc_grass, loc_mulch, loc_fallCleanup, loc_fertilizer}) => (
-      <LinkContainer key={locationId} to={`/locations/${locationId}`}>
-        <ListGroup.Item action>
-          <span className="font-weight-bold float-left">
-              Address: {loc_address_1}
-          </span>
-          <span className="font-weight-bold float-right">
-              {loc_city}
-          </span>
-          <br></br>
-          <span className="text-muted float-left">
-              Grass Cut: ${loc_grass}
-          </span>
-            <span className="text-muted float-right">
-              Mulch: ${loc_mulch}
-          </span>
-          <br></br>
-          <span className="text-muted float-left">
-              Fall Cleanup: ${loc_fallCleanup}
-          </span>
-            <span className="text-muted float-right">
-              Fertilizer: ${loc_fertilizer}
-          </span>
-        </ListGroup.Item>
-      </LinkContainer>
-      ))}
-    </>
-  );
-}
+        return (
+            <>
+            {locations.map(({ locationId, loc_address_1, loc_city, loc_grass, loc_mulch, loc_fallCleanup, loc_fertilizer}) => (
+            <LinkContainer key={locationId} to={`/locations/${locationId}`}>
+                <ListGroup.Item action>
+                <span className="font-weight-bold float-left">
+                    Address: {loc_address_1}
+                </span>
+                <span className="font-weight-bold float-right">
+                    {loc_city}
+                </span>
+                <br></br>
+                <span className="text-muted float-left">
+                    Grass Cut: ${loc_grass}
+                </span>
+                    <span className="text-muted float-right">
+                    Mulch: ${loc_mulch}
+                </span>
+                <br></br>
+                <span className="text-muted float-left">
+                    Fall Cleanup: ${loc_fallCleanup}
+                </span>
+                    <span className="text-muted float-right">
+                    Fertilizer: ${loc_fertilizer}
+                </span>
+                </ListGroup.Item>
+            </LinkContainer>
+            ))}
+            </>
+        );
+    }
+
+    function renderInvoicesList(invoices) {
+        return (
+            <>
+        <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Invoice ID</th>
+            <th>Invoice Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {invoices.map(({invoiceId, invoice_amount}) => (
+            <tr>
+              <td>{invoiceId}</td>
+              <td>{invoice_amount}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+            </>
+        );
+    }
+
+    function renderPaymentsList(payments) {
+        return (
+            <>
+        <Table striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Payment ID</th>
+            <th>Payment Amount</th>
+            <th>Check Number</th>
+          </tr>
+        </thead>
+        <tbody>
+          {payments.map(({paymentId, payment_amount, payment_check_num}) => (
+            <tr>
+                <td>{paymentId}</td>
+                <td>{payment_amount}</td>
+                <td>{payment_check_num}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+            </>
+        );
+    }
+
+
 
     return (
         <div className="Customer">
@@ -359,12 +431,15 @@ export default function Customer(){
             </LinkContainer>
             <ListGroup>{!isLoading && renderLocationsList(locations)}</ListGroup>
             
+
             <LinkContainer 
                 to={{
                     pathname: `/invoice/new/${id}`
                 }}>
                 <ListGroup.Item action className="py-3 text-nowrap text-truncate">
                 <span className="ml-2 font-weight-bold">Add a New Invoice</span>
+                <span className="ml-2 float-left"><FaFileInvoiceDollar size={23} /></span>
+                
                 </ListGroup.Item>
             </LinkContainer>
             <LinkContainer 
@@ -372,10 +447,33 @@ export default function Customer(){
                     pathname: `/payment/new/${id}`
                 }}>
                 <ListGroup.Item action className="py-3 text-nowrap text-truncate">
-                <span className="ml-2 font-weight-bold">Add a New Payment</span>
+                <span className="ml-2 font-weight-bold">Enter a Payment</span>
+                <span className="ml-2 float-left"><MdAttachMoney size={23} /></span>
                 </ListGroup.Item>
             </LinkContainer>
+            <Accordion>
+            <Card>
+                <Accordion.Toggle as={Card.Header} eventKey="0" className="font-weight-bold py-3 text-nowrap text-truncate">
 
+                <span className="ml-2">View Payments/Invoices</span>
+                <span className="ml-2 float-left"><BsCardList size={23} /></span>
+                </Accordion.Toggle>
+                <Accordion.Collapse eventKey="0">
+                <Card.Body>
+                <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                <Tab eventKey="Invoices" title="Invoices">
+                    <br></br>
+                   {!isLoading && renderInvoicesList(invoices)}
+                </Tab>
+                <Tab eventKey="Payments" title="Payments">
+                    <br></br>
+                    {!isLoading && renderPaymentsList(payments)}
+                </Tab>
+                </Tabs>
+                </Card.Body>
+                </Accordion.Collapse>
+            </Card>
+            </Accordion>
         </div>
     );
 }
